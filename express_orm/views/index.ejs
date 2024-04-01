@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>list</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div>
+      <% list.forEach(element => { %>
+        <div>
+          <span style="margin-left: 50px;"><%= element.username %></span>
+          <span style="margin-left: 50px;"><%= element.age %></span>
+          <span style="margin-left: 50px;"><%= element.sex %></span>
+
+          <span style="margin-left: 50px;cursor: pointer;" onclick="deleteItem('<%= element.id %>')">删除</span>
+        </div>
+      <% }) %>
+    </div>
+
+
+    <script>
+      // 定义发送删除请求的函数
+      function deleteItem(itemId) {
+        fetch(`/delete/${itemId}`, {
+          method: 'DELETE',
+        })
+        .then(response => {})
+        .catch(error => {
+          console.error('Error deleting item:', error);
+        });
+      }
+    </script>
+  </body>
+</html>
