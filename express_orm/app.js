@@ -10,6 +10,8 @@ import 'dotenv/config';
 
 import indexRouter from './router/index.js';
 
+import corsMiddleware from './utils/corsMiddleware.js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -28,6 +30,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // 设置静态目录
 app.use(express.static(path.join(__dirname, 'public')));
+
+// 配置 CORS 中间件,解决跨域问题
+app.use(corsMiddleware);
 
 app.use('/', indexRouter);
 
